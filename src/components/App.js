@@ -12,17 +12,110 @@ class App extends React.Component {
       breakLength: 5,
       sessionLength: 25,
       timerMinute: 25,
+      isPlay: false,
     };
+    this.onIncreaseBreakLength = this.onIncreaseBreakLength.bind(this);
+    this.onDecreaseBreakLength = this.onDecreaseBreakLength.bind(this);
+    this.onDecreaseSessionLength = this.onDecreaseSessionLength.bind(this);
+    this.onIncreaseSessionLength = this.onIncreaseSessionLength.bind(this);
+    this.onToggleInterval = this.onToggleInterval.bind(this);
+    this.onUpdateTimerMinute = this.onUpdateTimerMinute.bind(this);
+    this.onTimerRestart = this.onTimerRestart.bind(this);
+    this.onPlayStopTimer = this.onPlayStopTimer.bind(this);
   }
+
+  onIncreaseBreakLength() {
+    this.setState((prevState) => {
+      return {
+        breakLength: prevState.breakLength + 1,
+      };
+    });
+  }
+
+  onDecreaseBreakLength() {
+    this.setState((prevState) => {
+      return {
+        breakLength: prevState.breakLength - 1,
+      };
+    });
+  }
+
+  onIncreaseSessionLength() {
+    this.setState((prevState) => {
+      return {
+        sessionLength: prevState.sessionLength + 1,
+        timerMinute: prevState.sessionLength + 1,
+      };
+    });
+  }
+
+  onDecreaseSessionLength() {
+    this.setState((prevState) => {
+      return {
+        sessionLength: prevState.sessionLength - 1,
+        timerMinute: prevState.sessionLength - 1,
+      };
+    });
+  }
+
+  onUpdateTimerMinute() {
+    this.setState((prevState) => {
+      return {
+        timerMinute: prevState.timerMinute - 1,
+      };
+    });
+  }
+
+  onToggleInterval(isSession) {
+    if (isSession) {
+      this.setState({
+        timerMinute: this.state.sessionLength,
+      });
+    } else {
+      this.setState({
+        timerMinute: this.state.breakLength,
+      });
+    }
+  }
+
+  onTimerRestart() {
+    this.setState({
+      timerMinute: this.state.sessionLength,
+    });
+  }
+
+  onPlayStopTimer(isPlay) {
+    this.setState({
+      isPlay: isPlay,
+    });
+  }
+
   render() {
     return (
       <main>
         <h2>Pomo Time</h2>
         <section className="interval-length-container">
-          <BreakTime breakTime={this.state.breakLength} />
-          <SessionLength sessionLength={this.state.sessionLength} />
+          <BreakTime
+            isPlay={this.state.isPlay}
+            breakTime={this.state.breakLength}
+            increaseBreak={this.onIncreaseBreakLength}
+            decreaseBreak={this.onDecreaseBreakLength}
+          />
+          <SessionLength
+            isPlay={this.state.isPlay}
+            sessionLength={this.state.sessionLength}
+            increaseSession={this.onIncreaseSessionLength}
+            decreaseSession={this.onDecreaseSessionLength}
+          />
         </section>
-        <Timer timerMinute={this.state.timerMinute} />
+        <Timer
+          timerMinute={this.state.timerMinute}
+          breakLength={this.state.breakLength}
+          onUpdateTimerMinute={this.onUpdateTimerMinute}
+          toggleInterval={this.onToggleInterval}
+          timerRestart={this.onTimerRestart}
+          onPlayStopTimer={this.onPlayStopTimer}
+        />
       </main>
     );
   }

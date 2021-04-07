@@ -1,13 +1,37 @@
 import React from 'react';
 
 function BreakTime(props) {
+  function decreaseCounter() {
+    if (props.breakTime === 1) {
+      return;
+    }
+    props.decreaseBreak();
+  }
+
+  function increaseCounter() {
+    if (props.breakTime === 60) {
+      return;
+    }
+    props.increaseBreak();
+  }
+
   return (
     <section>
       <h4>Break Length</h4>
       <section className="interval-container">
-        <button>Down</button>
+        <button
+          disabled={props.isPlay === true ? 'disabled' : ''}
+          onClick={decreaseCounter}
+        >
+          Down
+        </button>
         <p className="interval-length">{props.breakTime}</p>
-        <button>Up</button>
+        <button
+          disabled={props.isPlay === true ? 'disabled' : ''}
+          onClick={increaseCounter}
+        >
+          Up
+        </button>
       </section>
     </section>
   );
