@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/pomo-time/static/css/main.f47e65fc.chunk.css",
+    "main.js": "/pomo-time/static/js/main.ebbaf059.chunk.js",
+    "main.js.map": "/pomo-time/static/js/main.ebbaf059.chunk.js.map",
+    "runtime-main.js": "/pomo-time/static/js/runtime-main.667b5d62.js",
+    "runtime-main.js.map": "/pomo-time/static/js/runtime-main.667b5d62.js.map",
+    "static/js/2.85b8fdf8.chunk.js": "/pomo-time/static/js/2.85b8fdf8.chunk.js",
+    "static/js/2.85b8fdf8.chunk.js.map": "/pomo-time/static/js/2.85b8fdf8.chunk.js.map",
+    "static/js/3.9c66c309.chunk.js": "/pomo-time/static/js/3.9c66c309.chunk.js",
+    "static/js/3.9c66c309.chunk.js.map": "/pomo-time/static/js/3.9c66c309.chunk.js.map",
+    "index.html": "/pomo-time/index.html",
+    "static/css/main.f47e65fc.chunk.css.map": "/pomo-time/static/css/main.f47e65fc.chunk.css.map",
+    "static/js/2.85b8fdf8.chunk.js.LICENSE.txt": "/pomo-time/static/js/2.85b8fdf8.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.667b5d62.js",
+    "static/js/2.85b8fdf8.chunk.js",
+    "static/css/main.f47e65fc.chunk.css",
+    "static/js/main.ebbaf059.chunk.js"
+  ]
+}
