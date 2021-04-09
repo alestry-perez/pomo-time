@@ -1,18 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function BreakTime(props) {
-  function decreaseCounter() {
-    if (props.breakTime === 1) {
-      return;
-    }
-    props.decreaseBreak();
+  const [count, setCount] = useState(5);
+
+  function decreaseCount() {
+    setCount(count - 1);
   }
 
-  function increaseCounter() {
-    if (props.breakTime === 60) {
-      return;
-    }
-    props.increaseBreak();
+  function increaseCount() {
+    setCount(count + 1);
   }
 
   return (
@@ -21,14 +17,14 @@ function BreakTime(props) {
       <section className="interval-container">
         <button
           disabled={props.isPlay === true ? 'disabled' : ''}
-          onClick={decreaseCounter}
+          onClick={decreaseCount}
         >
           Down
         </button>
-        <p className="interval-length">{props.breakTime}</p>
+        <p className="interval-length">{count}</p>
         <button
           disabled={props.isPlay === true ? 'disabled' : ''}
-          onClick={increaseCounter}
+          onClick={increaseCount}
         >
           Up
         </button>

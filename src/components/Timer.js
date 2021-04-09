@@ -1,101 +1,91 @@
 import React, { useState } from 'react';
 
-class Timer extends React.Component {
-  constructor() {
-    super();
+function Timer() {
+  // constructor() {
+  //   super();
 
-    this.state = {
-      isSession: true,
-      timerSecond: 0,
-      intervalId: 0,
-    };
+  //   this.state = {
+  //     isSession: true,
+  //     timerSecond: 0,
+  //     intervalId: 0,
+  //   };
 
-    this.playTimer = this.playTimer.bind(this);
-    this.stopTimer = this.stopTimer.bind(this);
-    this.restartTimer = this.restartTimer.bind(this);
-    this.decreaseTimer = this.decreaseTimer.bind(this);
+  //   this.playTimer = this.playTimer.bind(this);
+  //   this.stopTimer = this.stopTimer.bind(this);
+  //   this.restartTimer = this.restartTimer.bind(this);
+  //   this.decreaseTimer = this.decreaseTimer.bind(this);
+  // }
+
+  function playButton() {
+    // let intervalId = setInterval(this.decreaseTimer, 1000);
+    // this.props.onPlayStopTimer(true);
+    // this.setState({
+    //   intervalId: intervalId,
+    // });
   }
 
-  playTimer() {
-    let intervalId = setInterval(this.decreaseTimer, 1000);
-    this.props.onPlayStopTimer(true);
-
-    this.setState({
-      intervalId: intervalId,
-    });
+  function stopButton() {
+    // clearInterval(this.state.intervalId);
+    // this.props.onPlayStopTimer(false);
   }
 
-  stopTimer() {
-    clearInterval(this.state.intervalId);
-    this.props.onPlayStopTimer(false);
+  function restartButton() {
+    // this.stopTimer();
+    // this.props.timerRestart();
+    // this.props.onPlayStopTimer(false);
+    // this.setState({
+    //   timerSecond: 0,
+    //   isSession: true,
+    // });
   }
 
-  restartTimer() {
-    this.stopTimer();
-    this.props.timerRestart();
-    this.props.onPlayStopTimer(false);
-
-    this.setState({
-      timerSecond: 0,
-      isSession: true,
-    });
+  function decreaseTimer() {
+    // switch (this.state.timerSecond) {
+    //   case 0:
+    //     if (this.props.timerMinute === 0) {
+    //       if (this.state.isSession) {
+    //         this.setState({
+    //           isSession: false,
+    //         });
+    //         this.props.toggleInterval(this.state.isSession);
+    //       } else {
+    //         this.setState({
+    //           isSession: true,
+    //         });
+    //         this.props.toggleInterval(this.state.isSession);
+    //       }
+    //     } else {
+    //       this.props.updateTimerMinute();
+    //       this.setState({
+    //         timerSecond: 59,
+    //       });
+    //     }
+    //     break;
+    //   default:
+    //     this.setState((prevState) => {
+    //       return {
+    //         timerSecond: prevState.timerSecond - 1,
+    //       };
+    //     });
+    //     break;
+    // }
   }
 
-  decreaseTimer() {
-    switch (this.state.timerSecond) {
-      case 0:
-        if (this.props.timerMinute === 0) {
-          if (this.state.isSession) {
-            this.setState({
-              isSession: false,
-            });
-            this.props.toggleInterval(this.state.isSession);
-          } else {
-            this.setState({
-              isSession: true,
-            });
-            this.props.toggleInterval(this.state.isSession);
-          }
-        } else {
-          this.props.updateTimerMinute();
-          this.setState({
-            timerSecond: 59,
-          });
-        }
-        break;
-      default:
-        this.setState((prevState) => {
-          return {
-            timerSecond: prevState.timerSecond - 1,
-          };
-        });
-        break;
-    }
-  }
-
-  render() {
-    return (
-      <section>
-        <section className="timer-container">
-          <h4>{this.state.isSession === true ? 'Session' : 'Break'}</h4>
-          <span className="timer">{this.props.timerMinute}</span>
-          <span className="timer">:</span>
-          <span className="timer">
-            {this.state.timerSecond === 0
-              ? '00'
-              : this.state.timerSecond < 10
-              ? '0' + this.state.timerSecond
-              : this.state.timerSecond}
-          </span>
-        </section>
-        <section className="timer-actions">
-          <button onClick={this.playTimer}>Play</button>
-          <button onClick={this.stopTimer}>Stop</button>
-          <button onClick={this.restartTimer}>Restart</button>
-        </section>
+  return (
+    <section>
+      <section className="timer-container">
+        <h4>Session/Break</h4>
+        <span className="timer">{}</span>
+        <span className="timer">:</span>
+        <span className="timer">{}</span>
       </section>
-    );
-  }
+      <section className="timer-actions">
+        <button onClick={playButton}>Play</button>
+        <button onClick={stopButton}>Stop</button>
+        <button onClick={restartButton}>Restart</button>
+      </section>
+    </section>
+  );
 }
 
 export default Timer;
