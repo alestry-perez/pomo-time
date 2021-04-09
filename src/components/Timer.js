@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 class Timer extends React.Component {
   constructor() {
