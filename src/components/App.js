@@ -5,6 +5,12 @@ import SessionLength from './SessionLength';
 import Timer from './Timer';
 
 function App() {
+  const [count, setCount] = useState({
+    breakLength: 5,
+    sessionLength: 25,
+    timerMinute: 25,
+    isPlay: false,
+  });
   // constructor() {
   //   super();
 
