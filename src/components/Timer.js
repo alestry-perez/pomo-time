@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 
 function Timer() {
+  const [count, setCount] = useState({
+    isSession: true,
+    timerSecond: 0,
+    intervalId: 0,
+  });
   // constructor() {
   //   super();
 
