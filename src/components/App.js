@@ -92,7 +92,7 @@ function App() {
 
   function onPlayStopTimer() {
     // this.setState({
-    //   isPlay: isPlay,
+    //isPlay: isPlay,
     // });
   }
 
@@ -107,7 +107,7 @@ function App() {
         // decreaseBreak={this.onDecreaseBreakLength}
         />
         <SessionLength
-        // isPlay={this.state.isPlay}
+        // isPlay={isPlay}
         // sessionLength={this.state.sessionLength}
         // increaseSession={this.onIncreaseSessionLength}
         // decreaseSession={this.onDecreaseSessionLength}

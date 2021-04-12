@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 function Timer() {
-  const [count, setCount] = useState({
+  const [session, setSession] = useState({
     isSession: true,
     timerSecond: 0,
     intervalId: 0,
