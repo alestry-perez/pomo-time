@@ -5,12 +5,11 @@ import SessionLength from './SessionLength';
 import Timer from './Timer';
 
 function App() {
-  const [count, setCount] = useState({
-    breakLength: 5,
-    sessionLength: 25,
-    timerMinute: 25,
-    isPlay: false,
-  });
+  const [breakLength, setBreakLength] = useState(5);
+  const [sessionLength, setSessionLength] = useState(25);
+  const [timerMinute, setTimerMinute] = useState(25);
+  const [isPlay, setIsPlay] = useState(false);
+
   // constructor() {
   //   super();
 
@@ -30,7 +29,7 @@ function App() {
   //   this.onPlayStopTimer = this.onPlayStopTimer.bind(this);
   // }
 
-  function onIncreaseBreakLength() {
+  function increaseBreakLength() {
     // this.setState((prevState) => {
     //   return {
     //     breakLength: prevState.breakLength + 1,
@@ -38,7 +37,7 @@ function App() {
     // });
   }
 
-  function onDecreaseBreakLength() {
+  function decreaseBreakLength() {
     // this.setState((prevState) => {
     //   return {
     //     breakLength: prevState.breakLength - 1,
@@ -46,7 +45,7 @@ function App() {
     // });
   }
 
-  function onIncreaseSessionLength() {
+  function increaseSessionLength() {
     // this.setState((prevState) => {
     //   return {
     //     sessionLength: prevState.sessionLength + 1,
@@ -55,7 +54,7 @@ function App() {
     // });
   }
 
-  function onDecreaseSessionLength() {
+  function decreaseSessionLength() {
     // this.setState((prevState) => {
     //   return {
     //     sessionLength: prevState.sessionLength - 1,
@@ -64,7 +63,7 @@ function App() {
     // });
   }
 
-  function onUpdateTimerMinute() {
+  function updateTimerMinute() {
     // this.setState((prevState) => {
     //   return {
     //     timerMinute: prevState.timerMinute - 1,
@@ -72,7 +71,7 @@ function App() {
     // });
   }
 
-  function onToggleInterval() {
+  function toggleInterval() {
     // if (isSession) {
     //   this.setState({
     //     timerMinute: this.state.sessionLength,
@@ -84,13 +83,13 @@ function App() {
     // }
   }
 
-  function onTimerRestart() {
+  function timerRestart() {
     // this.setState({
     //   timerMinute: this.state.sessionLength,
     // });
   }
 
-  function onPlayStopTimer() {
+  function playStopTimer() {
     // this.setState({
     //isPlay: isPlay,
     // });
