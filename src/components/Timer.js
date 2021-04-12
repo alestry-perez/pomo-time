@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-function Timer(props) {
+const Timer = (props) => {
   const [isSession, setIsSession] = useState(true);
   const [timerSecond, setTimerSecond] = useState(0);
-  const [intervalId, setIntervalId] = useState(0);
+  let [intervalId, setIntervalId] = useState(0);
   // constructor() {
   //   super();
 
@@ -20,16 +20,15 @@ function Timer(props) {
   // }
 
   function playButton() {
-    let intervalId = setInterval(this.decreaseTimer, 1000);
-    this.props.onPlayStopTimer(true);
-    this.setState({
-      intervalId: intervalId,
-    });
+    intervalId = setInterval(decreaseTimer, 1000);
+    props.onPlayStopTimer(true);
+
+    intervalId((intervalId = setIntervalId));
   }
 
   function stopButton() {
-    // clearInterval(this.state.intervalId);
-    // this.props.onPlayStopTimer(false);
+    // clearInterval(intervalId);
+    // props.onPlayStopTimer(false);
   }
 
   function restartButton() {
@@ -48,13 +47,13 @@ function Timer(props) {
         if (props.timerMinute === 0) {
           if (isSession) {
             isSession(false);
-            props.toggleInterval(isSession);
+            // toggleInterval(isSession);
           } else {
             isSession(true);
-            props.toggleInterval(isSession);
+            // toggleInterval(isSession);
           }
         } else {
-          props.updateTimerMinute();
+          updateTimerMinute();
           timerSecond(59);
         }
         break;
@@ -85,6 +84,6 @@ function Timer(props) {
       </section>
     </section>
   );
-}
+};
 
 export default Timer;
