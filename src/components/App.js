@@ -5,30 +5,6 @@ import SessionLength from './SessionLength';
 import Timer from './Timer';
 
 function App() {
-  const [breakLength, setBreakLength] = useState(5);
-  const [sessionLength, setSessionLength] = useState(25);
-
-  const [isPlay, setIsPlay] = useState(false);
-
-  // constructor() {
-  //   super();
-
-  //   this.state = {
-  //     breakLength: 5,
-  //     sessionLength: 25,
-  //     timerMinute: 25,
-  //     isPlay: false,
-  //   };
-  //   this.onIncreaseBreakLength = this.onIncreaseBreakLength.bind(this);
-  //   this.onDecreaseBreakLength = this.onDecreaseBreakLength.bind(this);
-  //   this.onDecreaseSessionLength = this.onDecreaseSessionLength.bind(this);
-  //   this.onIncreaseSessionLength = this.onIncreaseSessionLength.bind(this);
-  //   this.onToggleInterval = this.onToggleInterval.bind(this);
-  //   this.onUpdateTimerMinute = this.onUpdateTimerMinute.bind(this);
-  //   this.onTimerRestart = this.onTimerRestart.bind(this);
-  //   this.onPlayStopTimer = this.onPlayStopTimer.bind(this);
-  // }
-
   function increaseBreakLength() {
     // this.setState((prevState) => {
     //   return {
@@ -74,9 +50,9 @@ function App() {
 
   function toggleInterval() {
     if (Timer.isSession) {
-      Timer.timerMinutes(sessionLength);
+      Timer.timerMinutes(Timer.sessionLength);
     } else {
-      Timer.timerMinutes(breakLength);
+      Timer.timerMinutes(Timer.breakLength);
     }
   }
 
@@ -110,7 +86,7 @@ function App() {
       </section>
       <Timer
         timerMinutes={Timer.timerMinutes}
-        breakLength={breakLength}
+        breakLength={Timer.breakLength}
         updateTimerMinutes={updateTimerMinutes}
         toggleInterval={toggleInterval}
         timerRestart={timerRestart}

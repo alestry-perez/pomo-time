@@ -5,20 +5,10 @@ const Timer = (props) => {
   const [timerMinutes, setTimerMinutes] = useState(25);
   const [timerSeconds, setTimerSeconds] = useState(0);
   let [intervalId, setIntervalId] = useState(0);
-  // constructor() {
-  //   super();
-
-  //   this.state = {
-  //     isSession: true,
-  //     timerSecond: 0,
-  //     intervalId: 0,
-  //   };
-
-  //   this.playTimer = this.playTimer.bind(this);
-  //   this.stopTimer = this.stopTimer.bind(this);
-  //   this.restartTimer = this.restartTimer.bind(this);
-  //   this.decreaseTimer = this.decreaseTimer.bind(this);
-  // }
+  // new code below
+  const [breakLength, setBreakLength] = useState(5);
+  const [sessionLength, setSessionLength] = useState(25);
+  const [isPlay, setIsPlay] = useState(false);
 
   function playButton() {
     intervalId = setInterval(decreaseTimer, 1000);
