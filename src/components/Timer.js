@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const Timer = (props) => {
   const [isSession, setIsSession] = useState(true);
+  const [timerMinutes, setTimerMinutes] = useState(25);
   const [timerSeconds, setTimerSeconds] = useState(0);
   let [intervalId, setIntervalId] = useState(0);
   // constructor() {
@@ -39,16 +40,16 @@ const Timer = (props) => {
   }
 
   function decreaseTimer() {
-    if (props.timerMinutes === 0 && timerSeconds === 0) {
+    if (timerMinutes === 0 && timerSeconds === 0) {
       // reset
       setTimerSeconds(0);
       props.setTimerMinutes();
     } else {
       if (timerSeconds === 0) {
-        props.setTimerMinutes((timerMinutes) => timerMinutes - 1);
+        setTimerMinutes((prev) => prev - 1);
         setTimerSeconds(59);
       } else {
-        setTimerSeconds((timerSeconds) => timerSeconds - 1);
+        setTimerSeconds((prev) => prev - 1);
       }
     }
   }
@@ -87,7 +88,7 @@ const Timer = (props) => {
     <section>
       <section className="timer-container">
         <h4>{isSession === true ? 'Session' : 'Break'}</h4>
-        <span className="timer">{props.timerMinutes}</span>
+        <span className="timer">{timerMinutes}</span>
         <span className="timer">:</span>
         <span className="timer">{timerSeconds}</span>
       </section>

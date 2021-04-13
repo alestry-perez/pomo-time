@@ -7,7 +7,7 @@ import Timer from './Timer';
 function App() {
   const [breakLength, setBreakLength] = useState(5);
   const [sessionLength, setSessionLength] = useState(25);
-  const [timerMinutes, setTimerMinutes] = useState(25);
+
   const [isPlay, setIsPlay] = useState(false);
 
   // constructor() {
@@ -74,9 +74,9 @@ function App() {
 
   function toggleInterval() {
     if (Timer.isSession) {
-      timerMinutes(sessionLength);
+      Timer.timerMinutes(sessionLength);
     } else {
-      timerMinutes(breakLength);
+      Timer.timerMinutes(breakLength);
     }
   }
 
@@ -109,7 +109,7 @@ function App() {
         />
       </section>
       <Timer
-        timerMinutes={timerMinutes}
+        timerMinutes={Timer.timerMinutes}
         breakLength={breakLength}
         updateTimerMinutes={updateTimerMinutes}
         toggleInterval={toggleInterval}
