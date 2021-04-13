@@ -7,7 +7,7 @@ import Timer from './Timer';
 function App() {
   const [breakLength, setBreakLength] = useState(5);
   const [sessionLength, setSessionLength] = useState(25);
-  const [timerMinute, setTimerMinute] = useState(25);
+  const [timerMinutes, setTimerMinutes] = useState(25);
   const [isPlay, setIsPlay] = useState(false);
 
   // constructor() {
@@ -63,7 +63,8 @@ function App() {
     // });
   }
 
-  function updateTimerMinute() {
+  function updateTimerMinutes() {
+    // setTimerMinutes((timerMinutes) => timerMinutes - 1);
     // this.setState((prevState) => {
     //   return {
     //     timerMinute: prevState.timerMinute - 1,
@@ -72,27 +73,22 @@ function App() {
   }
 
   function toggleInterval() {
-    // if (isSession) {
-    //   this.setState({
-    //     timerMinute: this.state.sessionLength,
-    //   });
-    // } else {
-    //   this.setState({
-    //     timerMinute: this.state.breakLength,
-    //   });
-    // }
+    if (Timer.isSession) {
+      timerMinutes(sessionLength);
+    } else {
+      timerMinutes(breakLength);
+    }
   }
 
   function timerRestart() {
+    // timerMinute((sessionLength) => sessionLength);
     // this.setState({
     //   timerMinute: this.state.sessionLength,
     // });
   }
 
   function playStopTimer() {
-    // this.setState({
-    //isPlay: isPlay,
-    // });
+    // setIsPlay((isPlay) => isPlay);
   }
 
   return (
@@ -100,25 +96,25 @@ function App() {
       <h2>Pomo Time</h2>
       <section className="interval-length-container">
         <BreakTime
-        // isPlay={this.state.isPlay}
-        // breakTime={this.state.breakLength}
-        // increaseBreak={this.onIncreaseBreakLength}
-        // decreaseBreak={this.onDecreaseBreakLength}
+        // isPlay={isPlay}
+        // breakTime={breakLength}
+        // increaseBreak={increaseBreakLength}
+        // decreaseBreak={decreaseBreakLength}
         />
         <SessionLength
         // isPlay={isPlay}
-        // sessionLength={this.state.sessionLength}
-        // increaseSession={this.onIncreaseSessionLength}
-        // decreaseSession={this.onDecreaseSessionLength}
+        // sessionLength={sessionLength}
+        // increaseSession={increaseSessionLength}
+        // decreaseSession={decreaseSessionLength}
         />
       </section>
       <Timer
-      // timerMinute={this.state.timerMinute}
-      // breakLength={this.state.breakLength}
-      // updateTimerMinute={this.onUpdateTimerMinute}
-      // toggleInterval={this.onToggleInterval}
-      // timerRestart={this.onTimerRestart}
-      // onPlayStopTimer={this.onPlayStopTimer}
+        timerMinutes={timerMinutes}
+        breakLength={breakLength}
+        updateTimerMinutes={updateTimerMinutes}
+        toggleInterval={toggleInterval}
+        timerRestart={timerRestart}
+        playStopTimer={playStopTimer}
       />
     </main>
   );
