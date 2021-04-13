@@ -33,7 +33,7 @@ const Timer = (props) => {
     if (timerMinutes === 0 && timerSeconds === 0) {
       // reset
       setTimerSeconds(0);
-      props.setTimerMinutes();
+      setTimerMinutes();
     } else {
       if (timerSeconds === 0) {
         setTimerMinutes((prev) => prev - 1);
