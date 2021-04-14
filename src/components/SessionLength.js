@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function SessionLength(props) {
+const SessionLength = (props) => {
   const [count, setCount] = useState(25);
 
   function decreaseCount() {
@@ -16,14 +16,14 @@ function SessionLength(props) {
       <h4>Session Length</h4>
       <section className="interval-container">
         <button
-          disabled={props.isPlay === true ? 'disabled' : ''}
+          disabled={props.isActive === true ? 'disabled' : ''}
           onClick={decreaseCount}
         >
           Down
         </button>
         <p className="interval-length">{count}</p>
         <button
-          disabled={props.isPlay === true ? 'disabled' : ''}
+          disabled={props.isActive === true ? 'disabled' : ''}
           onClick={increaseCount}
         >
           Up
@@ -31,6 +31,6 @@ function SessionLength(props) {
       </section>
     </section>
   );
-}
+};
 
 export default SessionLength;

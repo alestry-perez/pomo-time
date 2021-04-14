@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function BreakTime(props) {
+const BreakLength = (props) => {
   const [count, setCount] = useState(5);
 
   function decreaseCount() {
@@ -16,14 +16,14 @@ function BreakTime(props) {
       <h4>Break Length</h4>
       <section className="interval-container">
         <button
-          disabled={props.isPlay === true ? 'disabled' : ''}
+          disabled={props.isActive === true ? 'disabled' : ''}
           onClick={decreaseCount}
         >
           Down
         </button>
         <p className="interval-length">{count}</p>
         <button
-          disabled={props.isPlay === true ? 'disabled' : ''}
+          disabled={props.isActive === true ? 'disabled' : ''}
           onClick={increaseCount}
         >
           Up
@@ -31,6 +31,6 @@ function BreakTime(props) {
       </section>
     </section>
   );
-}
+};
 
-export default BreakTime;
+export default BreakLength;

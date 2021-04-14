@@ -1,48 +1,23 @@
 import React, { useState, useEffect } from 'react';
+import '../App.css';
 
 const Timer = (props) => {
-  const [isSession, setIsSession] = useState(true);
-  const [timerMinutes, setTimerMinutes] = useState(25);
+  const [activeSession, setActiveSession] = useState(true);
   const [timerSeconds, setTimerSeconds] = useState(0);
-  let [intervalId, setIntervalId] = useState(0);
-  // new code below
-  const [breakLength, setBreakLength] = useState(5);
-  const [sessionLength, setSessionLength] = useState(25);
-  const [isPlay, setIsPlay] = useState(false);
+  const [intervalId, setIntervalId] = useState(0);
+  const [counter, setChangeCounter] = useState(0);
 
-  function playButton() {
-    intervalId = setInterval(decreaseTimer, 1000);
-    // props.playStopTimer(true);
-    setIntervalId(intervalId);
-  }
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (counter) setChangeCounter((prevCounter) => prevCounter + 1);
+    }, 1000);
 
-  function stopButton() {
-    clearInterval(intervalId);
-    props.playStopTimer(false);
-  }
+    return () => clearInterval(interval);
+  }, [counter]);
 
-  function restartButton() {
-    props.stopTimer();
-    props.timerRestart();
-    props.playStopTimer(false);
-    timerSeconds(0);
-    isSession(true);
-  }
-
-  function decreaseTimer() {
-    if (timerMinutes === 0 && timerSeconds === 0) {
-      // reset
-      setTimerSeconds(0);
-      setTimerMinutes();
-    } else {
-      if (timerSeconds === 0) {
-        setTimerMinutes((prev) => prev - 1);
-        setTimerSeconds(59);
-      } else {
-        setTimerSeconds((prev) => prev - 1);
-      }
-    }
-  }
+  useEffect(() => {
+    props.toggleInterval(activeSession);
+  }, []);
 
   useEffect(() => {
     const token = setTimeout(decreaseTimer, 1000);
@@ -52,35 +27,55 @@ const Timer = (props) => {
     };
   });
 
-  // function decreaseTimer() {
-  //   switch (timerSeconds) {
-  //     case 0:
-  //       if (props.timerMinutes === 0) {
-  //         if (isSession) {
-  //           setIsSession(false);
-  //           props.toggleInterval(isSession);
-  //         } else {
-  //           setIsSession(true);
-  //           props.toggleInterval(isSession);
-  //         }
-  //       } else {
-  //         props.updateTimerMinutes();
-  //         setTimerSeconds(59);
-  //       }
-  //       break;
-  //     default:
-  //       timerSeconds((timerSeconds) => timerSeconds - 1);
-  //       break;
-  //   }
-  // }
+  useEffect(() => {}, [timerSeconds]);
+
+  const playButton = () => {
+    let interval = setInterval(decreaseTimer, 1000);
+    setIntervalId(interval);
+  };
+
+  const stopButton = () => {
+    clearInterval(intervalId);
+  };
+
+  const restartButton = () => {
+    stopButton();
+    props.resetTimer();
+    setTimerSeconds(0);
+  };
+
+  const decreaseTimer = () => {
+    switch (timerSeconds) {
+      case 0:
+        if (props.timerMinutes === 0) {
+          if (activeSession) {
+            setActiveSession(false);
+          } else {
+            setActiveSession(true);
+          }
+        } else {
+          props.updateTimerMinutes();
+          setTimerSeconds(59);
+        }
+        break;
+      default:
+        setTimerSeconds((prev) => prev - 1);
+    }
+  };
 
   return (
     <section>
       <section className="timer-container">
-        <h4>{isSession === true ? 'Session' : 'Break'}</h4>
-        <span className="timer">{timerMinutes}</span>
+        <h4>{activeSession === true ? 'Session' : 'Break'}</h4>
+        <span className="timer">{props.timerMinutes}</span>
         <span className="timer">:</span>
-        <span className="timer">{timerSeconds}</span>
+        <span className="timer">
+          {timerSeconds === 0
+            ? '00'
+            : timerSeconds < 10
+            ? '0' + timerSeconds
+            : timerSeconds}
+        </span>
       </section>
       <section className="timer-actions">
         <button onClick={playButton}>Play</button>

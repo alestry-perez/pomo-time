@@ -1,96 +1,63 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../App.css';
-import BreakTime from './BreakTime';
+import BreakLength from './BreakLength';
 import SessionLength from './SessionLength';
 import Timer from './Timer';
 
 function App() {
-  function increaseBreakLength() {
-    // this.setState((prevState) => {
-    //   return {
-    //     breakLength: prevState.breakLength + 1,
-    //   };
-    // });
-  }
+  const [breakLength, setBreakLength] = useState(5);
+  const [sessionLength, setSessionLength] = useState(25);
+  const [timerMinutes, setTimerMinutes] = useState(25);
 
-  function decreaseBreakLength() {
-    // this.setState((prevState) => {
-    //   return {
-    //     breakLength: prevState.breakLength - 1,
-    //   };
-    // });
-  }
-
-  function increaseSessionLength() {
-    // this.setState((prevState) => {
-    //   return {
-    //     sessionLength: prevState.sessionLength + 1,
-    //     timerMinute: prevState.sessionLength + 1,
-    //   };
-    // });
-  }
-
-  function decreaseSessionLength() {
-    // this.setState((prevState) => {
-    //   return {
-    //     sessionLength: prevState.sessionLength - 1,
-    //     timerMinute: prevState.sessionLength - 1,
-    //   };
-    // });
-  }
-
-  function updateTimerMinutes() {
-    // setTimerMinutes((timerMinutes) => timerMinutes - 1);
-    // this.setState((prevState) => {
-    //   return {
-    //     timerMinute: prevState.timerMinute - 1,
-    //   };
-    // });
-  }
-
-  function toggleInterval() {
-    if (Timer.isSession) {
-      Timer.timerMinutes(Timer.sessionLength);
+  const increaseBreakLength = () => {
+    setBreakLength(breakLength + 1);
+  };
+  const decreaseBreakLength = () => {
+    setBreakLength(breakLength - 1);
+  };
+  const increaseSessionLength = () => {
+    setSessionLength(sessionLength + 1);
+    setTimerMinutes(timerMinutes + 1);
+  };
+  const decreaseSessionLength = () => {
+    setSessionLength(sessionLength - 1);
+    setTimerMinutes(timerMinutes - 1);
+  };
+  const updateTimerMinutes = () => {
+    setTimerMinutes(timerMinutes - 1);
+  };
+  const toggleInterval = (activeSession) => {
+    if (activeSession) {
+      setTimerMinutes(sessionLength);
     } else {
-      Timer.timerMinutes(Timer.breakLength);
+      setTimerMinutes(breakLength);
     }
-  }
-
-  function timerRestart() {
-    // timerMinute((sessionLength) => sessionLength);
-    // this.setState({
-    //   timerMinute: this.state.sessionLength,
-    // });
-  }
-
-  function playStopTimer() {
-    // setIsPlay((isPlay) => isPlay);
-  }
+  };
+  const resetTimer = () => {
+    setTimerMinutes(sessionLength);
+  };
 
   return (
     <main>
       <h2>Pomo Time</h2>
       <section className="interval-length-container">
-        <BreakTime
-        // isPlay={isPlay}
-        // breakTime={breakLength}
-        // increaseBreak={increaseBreakLength}
-        // decreaseBreak={decreaseBreakLength}
+        <BreakLength
+          increaseBreak={increaseBreakLength}
+          decreaseBreak={decreaseBreakLength}
+          breakLength={breakLength}
         />
         <SessionLength
-        // isPlay={isPlay}
-        // sessionLength={sessionLength}
-        // increaseSession={increaseSessionLength}
-        // decreaseSession={decreaseSessionLength}
+          increaseSessionLength={increaseSessionLength}
+          decreaseSessionLength={decreaseSessionLength}
+          sessionLength={sessionLength}
         />
       </section>
       <Timer
-        timerMinutes={Timer.timerMinutes}
-        breakLength={Timer.breakLength}
+        timerMinutes={timerMinutes}
+        breakLength={breakLength}
         updateTimerMinutes={updateTimerMinutes}
+        resetTimer={resetTimer}
         toggleInterval={toggleInterval}
-        timerRestart={timerRestart}
-        playStopTimer={playStopTimer}
       />
     </main>
   );
