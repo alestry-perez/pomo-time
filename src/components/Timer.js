@@ -1,54 +1,49 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import '../App.css';
 
-const Timer = (props) => {
-  const [activeSession, setActiveSession] = useState(true);
-  const [timerSeconds, setTimerSeconds] = useState(0);
-  const [intervalId, setIntervalId] = useState(0);
-  const [counter, setChangeCounter] = useState(0);
+const Timer = () => {
+  const [playing, setPlaying] = useState(false);
+  const [[timerMinutes, timerSeconds], setTimer] = useState([25, 0]);
+  const timerId = useRef(0);
 
   const playButton = () => {
-    let interval = setInterval(decreaseTimer, 500);
-    setIntervalId(interval);
+    setPlaying(true);
   };
 
-  const stopButton = () => {
-    clearInterval(intervalId);
+  const pauseButton = () => {
+    setPlaying(false);
   };
 
   const restartButton = () => {
-    stopButton();
-    props.resetTimer();
-    setTimerSeconds(0);
+    setPlaying(false);
+    setTimer([25, 0]);
   };
 
-  const decreaseTimer = () => {
-    switch (timerSeconds) {
-      case 0:
-        if (props.timerMinutes === 0) {
-          if (activeSession) {
-            setActiveSession(false);
-          } else {
-            setActiveSession(true);
-          }
-        } else {
-          props.updateTimerMinutes();
-          setTimerSeconds(59);
-        }
-        break;
-      default:
-        setTimerSeconds((prev) => prev - 1);
+  useEffect(() => {
+    if (playing) {
+      if (!timerMinutes && !timerSeconds) setPlaying(false);
+
+      timerId.current = setTimeout(() => {
+        setTimer(([min, sec]) => {
+          const newSec = !sec ? 59 : sec - 1;
+          const newMin = !sec ? min - 1 : min;
+
+          return [newMin > 0 ? newMin : 0, newSec];
+        });
+      }, 1000);
     }
-  };
+
+    return () => clearTimeout(timerId.current);
+  }, [playing, timerMinutes, timerSeconds]);
 
   return (
     <section>
       <section className="timer-container">
-        <h4>{activeSession === true ? 'Session' : 'Break'}</h4>
-        <span className="timer">{props.timerMinutes}</span>
+        <h4>{playing ? 'Session' : 'Break'}</h4>
+        <span className="timer">{timerMinutes}</span>
         <span className="timer">:</span>
         <span className="timer">
-          {timerSeconds === 0
+          {!timerSeconds || timerSeconds === 60
             ? '00'
             : timerSeconds < 10
             ? '0' + timerSeconds
@@ -57,7 +52,7 @@ const Timer = (props) => {
       </section>
       <section className="timer-actions">
         <button onClick={playButton}>Play</button>
-        <button onClick={stopButton}>Stop</button>
+        <button onClick={pauseButton}>Pause</button>
         <button onClick={restartButton}>Restart</button>
       </section>
     </section>

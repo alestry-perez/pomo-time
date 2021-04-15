@@ -7,7 +7,7 @@ import Timer from './Timer';
 function App() {
   const [breakLength, setBreakLength] = useState(5);
   const [sessionLength, setSessionLength] = useState(25);
-  const [timerMinutes, setTimerMinutes] = useState(25);
+  // const [timerMinutes, setTimerMinutes] = useState(25);
 
   const increaseBreakLength = () => {
     setBreakLength(breakLength + 1);
@@ -17,24 +17,24 @@ function App() {
   };
   const increaseSessionLength = () => {
     setSessionLength(sessionLength + 1);
-    setTimerMinutes(timerMinutes + 1);
+    Timer.setTimerMinutes(Timer.timerMinutes + 1);
   };
   const decreaseSessionLength = () => {
     setSessionLength(sessionLength - 1);
-    setTimerMinutes(timerMinutes - 1);
+    Timer.setTimerMinutes(Timer.timerMinutes - 1);
   };
   const updateTimerMinutes = () => {
-    setTimerMinutes(timerMinutes - 1);
+    Timer.setTimerMinutes(Timer.timerMinutes - 1);
   };
-  const toggleInterval = (activeSession) => {
-    if (activeSession) {
-      setTimerMinutes(sessionLength);
+  const toggleInterval = (playing) => {
+    if (playing) {
+      Timer.setTimerMinutes(sessionLength);
     } else {
-      setTimerMinutes(breakLength);
+      Timer.setTimerMinutes(breakLength);
     }
   };
   const resetTimer = () => {
-    setTimerMinutes(sessionLength);
+    Timer.setTimerMinutes(sessionLength);
   };
 
   return (
@@ -53,7 +53,7 @@ function App() {
         />
       </section>
       <Timer
-        timerMinutes={timerMinutes}
+        timerMinutes={Timer.timerMinutes}
         breakLength={breakLength}
         updateTimerMinutes={updateTimerMinutes}
         resetTimer={resetTimer}
