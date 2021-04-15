@@ -7,30 +7,8 @@ const Timer = (props) => {
   const [intervalId, setIntervalId] = useState(0);
   const [counter, setChangeCounter] = useState(0);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (counter) setChangeCounter((prevCounter) => prevCounter + 1);
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [counter]);
-
-  useEffect(() => {
-    props.toggleInterval(activeSession);
-  }, []);
-
-  useEffect(() => {
-    const token = setTimeout(decreaseTimer, 1000);
-
-    return function cleanUp() {
-      clearTimeout(token);
-    };
-  });
-
-  useEffect(() => {}, [timerSeconds]);
-
   const playButton = () => {
-    let interval = setInterval(decreaseTimer, 1000);
+    let interval = setInterval(decreaseTimer, 500);
     setIntervalId(interval);
   };
 
