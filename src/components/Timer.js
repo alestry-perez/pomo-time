@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import '../App.css';
 
-const Timer = () => {
+const Timer = (props) => {
   const [playing, setPlaying] = useState(false);
   const [[timerMinutes, timerSeconds], setTimer] = useState([25, 0]);
   const timerId = useRef(0);
@@ -40,7 +40,7 @@ const Timer = () => {
     <section>
       <section className="timer-container">
         <h4>{playing ? 'Session' : 'Break'}</h4>
-        <span className="timer">{timerMinutes}</span>
+        <span className="timer">{props.timerMinutes}</span>
         <span className="timer">:</span>
         <span className="timer">
           {!timerSeconds || timerSeconds === 60
