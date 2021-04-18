@@ -1,42 +1,44 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import '../App.css';
 import BreakLength from './BreakLength';
 import SessionLength from './SessionLength';
 import Timer from './Timer';
 
-function App() {
+const App = () => {
   const [breakLength, setBreakLength] = useState(5);
+  const [breakMinutes, setBreakMinutes] = useState(5);
   const [sessionLength, setSessionLength] = useState(25);
   const [timerMinutes, setTimerMinutes] = useState(25);
 
   const increaseBreakLength = () => {
     setBreakLength(breakLength + 1);
+    setBreakMinutes(breakLength + 1);
   };
   const decreaseBreakLength = () => {
     setBreakLength(breakLength - 1);
+    setBreakMinutes(breakLength - 1);
   };
 
   const increaseSessionLength = () => {
     setSessionLength(sessionLength + 1);
-    setTimerMinutes(sessionLength);
+    setTimerMinutes(sessionLength + 1);
   };
   const decreaseSessionLength = () => {
     setSessionLength(sessionLength - 1);
-    setTimerMinutes(sessionLength);
-  };
-  console.log(sessionLength);
-
-  const updateTimerMinutes = () => {
-    setTimerMinutes(timerMinutes - 1);
+    setTimerMinutes(sessionLength - 1);
   };
 
-  const toggleInterval = (playing) => {
+  /*const updateTimerMinutes = () => {
+    setTimerMinutes(timerMinutes);
+  };*/
+
+  /* const toggleInterval = (playing) => {
     if (playing) {
       setTimerMinutes(sessionLength);
     } else {
       setTimerMinutes(breakLength);
     }
-  };
+  };*/
   const resetTimer = () => {
     setTimerMinutes(sessionLength);
   };
@@ -57,14 +59,15 @@ function App() {
         />
       </section>
       <Timer
+        breakMinutes={breakMinutes}
         timerMinutes={timerMinutes}
         breakLength={breakLength}
-        updateTimerMinutes={updateTimerMinutes}
+        // updateTimerMinutes={updateTimerMinutes}
         resetTimer={resetTimer}
-        toggleInterval={toggleInterval}
+        //toggleInterval={toggleInterval}
       />
     </main>
   );
-}
+};
 
 export default App;
