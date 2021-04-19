@@ -4,10 +4,10 @@ import '../App.css';
 const Timer = (props) => {
   const [playing, setPlaying] = useState(false);
   const [[timerMinutes, timerSeconds], setTimer] = useState([25, 0]);
-  const [[breakTimerMinutes, breakTimerSeconds], setBreakTimer] = useState([
+  /*const [[breakTimerMinutes, breakTimerSeconds], setBreakTimer] = useState([
     5,
     0,
-  ]);
+  ]);*/
   const timerId = useRef(0);
 
   const playButton = () => {
