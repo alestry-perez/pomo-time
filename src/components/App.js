@@ -28,9 +28,9 @@ const App = () => {
     setTimerMinutes(sessionLength - 1);
   };
 
-  /*const updateTimerMinutes = () => {
+  const updateTimerMinutes = () => {
     setTimerMinutes(timerMinutes);
-  };*/
+  };
 
   /* const toggleInterval = (playing) => {
     if (playing) {
@@ -62,7 +62,7 @@ const App = () => {
         breakMinutes={breakMinutes}
         timerMinutes={timerMinutes}
         breakLength={breakLength}
-        // updateTimerMinutes={updateTimerMinutes}
+        updateTimerMinutes={updateTimerMinutes}
         resetTimer={resetTimer}
         //toggleInterval={toggleInterval}
       />
